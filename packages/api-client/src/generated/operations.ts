@@ -325,6 +325,14 @@ export const operations = {
     ],
     hasBody: false,
   },
+  getAuthSetup: {
+    operationId: 'getAuthSetup',
+    method: 'get',
+    path: '/api/auth/setup',
+    pathParams: [],
+    queryParams: [],
+    hasBody: false,
+  },
   getBoard: {
     operationId: 'getBoard',
     method: 'get',
@@ -2939,6 +2947,14 @@ export const operations = {
     queryParams: [],
     hasBody: false,
   },
+  postAuthSetup: {
+    operationId: 'postAuthSetup',
+    method: 'post',
+    path: '/api/auth/setup',
+    pathParams: [],
+    queryParams: [],
+    hasBody: true,
+  },
   record: {
     operationId: 'record',
     method: 'post',
@@ -3587,6 +3603,18 @@ export abstract class GeneratedUmamiClient {
     options?: RequestOptions,
   ): Promise<OperationOutput<'exportWebsite'>> {
     return this.execute('exportWebsite', input, options);
+  }
+
+  /**
+   * Get auth setup
+   * Generated from the App Router handler and its request-validation source. Add a colocated contract.ts to supply exact response models and curated documentation.
+   * `GET /api/auth/setup`
+   */
+  getAuthSetup(
+    input?: OperationInput<'getAuthSetup'>,
+    options?: RequestOptions,
+  ): Promise<OperationOutput<'getAuthSetup'>> {
+    return this.execute('getAuthSetup', input, options);
   }
 
   /**
@@ -4866,6 +4894,18 @@ export abstract class GeneratedUmamiClient {
     options?: RequestOptions,
   ): Promise<OperationOutput<'logout'>> {
     return this.execute('logout', input, options);
+  }
+
+  /**
+   * Create or update auth setup
+   * Generated from the App Router handler and its request-validation source. Add a colocated contract.ts to supply exact response models and curated documentation.
+   * `POST /api/auth/setup`
+   */
+  postAuthSetup(
+    input: OperationInput<'postAuthSetup'>,
+    options?: RequestOptions,
+  ): Promise<OperationOutput<'postAuthSetup'>> {
+    return this.execute('postAuthSetup', input, options);
   }
 
   /**
