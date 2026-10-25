@@ -1,5 +1,5 @@
--- Tofu: a copy of prisma/migrations/20_add_heatmap/migration.sql, applied by scripts/tofu-migrate.js during the build
--- (see TOFU.md). Changes from upstream, if any, are marked "Tofu:" below.
+-- Tofu: a copy of prisma/migrations/20_add_heatmap/migration.sql. It is applied once, in file-name order; TOFU.md
+-- (*Schema*) says what applies it. Changes from upstream, if any, are marked "Tofu:" below.
 
 ALTER TABLE "website" RENAME COLUMN "replay_enabled" TO "recorder_enabled";
 
@@ -36,5 +36,7 @@ CREATE INDEX "heatmap_event_website_id_created_at_idx" ON "heatmap_event"("websi
 CREATE INDEX "heatmap_event_website_id_url_path_event_type_created_at_idx" ON "heatmap_event"("website_id", "url_path", "event_type", "created_at");
 
 -- Tofu: row-level security on for every table this file creates. The app reads and writes them over its own
--- connection, which these rules do not limit; the database's public Data API gets nothing from them.
+-- connection, which these rules do not limit. Tofu opens the tables of the migration files it applies to the
+-- database's Data API, so these lines, with no policy, are what keep anyone holding the database's public key from
+-- every row: keep them (TOFU.md, *Schema*).
 ALTER TABLE "heatmap_event" ENABLE ROW LEVEL SECURITY;

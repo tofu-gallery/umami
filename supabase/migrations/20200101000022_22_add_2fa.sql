@@ -1,5 +1,5 @@
--- Tofu: a copy of prisma/migrations/22_add_2fa/migration.sql, applied by scripts/tofu-migrate.js during the build
--- (see TOFU.md). Changes from upstream, if any, are marked "Tofu:" below.
+-- Tofu: a copy of prisma/migrations/22_add_2fa/migration.sql. It is applied once, in file-name order; TOFU.md
+-- (*Schema*) says what applies it. Changes from upstream, if any, are marked "Tofu:" below.
 
 -- AlterTable
 ALTER TABLE "team" ADD COLUMN     "two_factor_required" BOOLEAN NOT NULL DEFAULT false;
@@ -76,7 +76,9 @@ CREATE UNIQUE INDEX "two_factor_rate_limit_user_id_key" ON "two_factor_rate_limi
 CREATE INDEX IF NOT EXISTS "session_replay_visit_id_idx" ON "session_replay"("visit_id");
 
 -- Tofu: row-level security on for every table this file creates. The app reads and writes them over its own
--- connection, which these rules do not limit; the database's public Data API gets nothing from them.
+-- connection, which these rules do not limit. Tofu opens the tables of the migration files it applies to the
+-- database's Data API, so these lines, with no policy, are what keep anyone holding the database's public key from
+-- every row: keep them (TOFU.md, *Schema*).
 ALTER TABLE "two_factor_auth" ENABLE ROW LEVEL SECURITY;
 ALTER TABLE "two_factor_backup_code" ENABLE ROW LEVEL SECURITY;
 ALTER TABLE "two_factor_otp_used" ENABLE ROW LEVEL SECURITY;

@@ -1,5 +1,5 @@
--- Tofu: a copy of prisma/migrations/03_metric_performance_index/migration.sql, applied by scripts/tofu-migrate.js during the build
--- (see TOFU.md). Changes from upstream, if any, are marked "Tofu:" below.
+-- Tofu: a copy of prisma/migrations/03_metric_performance_index/migration.sql. It is applied once, in file-name order; TOFU.md
+-- (*Schema*) says what applies it. Changes from upstream, if any, are marked "Tofu:" below.
 
 -- CreateIndex
 CREATE INDEX "event_data_website_id_created_at_idx" ON "event_data"("website_id", "created_at");

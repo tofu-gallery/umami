@@ -1,5 +1,5 @@
--- Tofu: a copy of prisma/migrations/26_add_api_key/migration.sql, applied by scripts/tofu-migrate.js during the build
--- (see TOFU.md). Changes from upstream, if any, are marked "Tofu:" below.
+-- Tofu: a copy of prisma/migrations/26_add_api_key/migration.sql. It is applied once, in file-name order; TOFU.md
+-- (*Schema*) says what applies it. Changes from upstream, if any, are marked "Tofu:" below.
 
 -- CreateTable
 CREATE TABLE "api_key" (
@@ -24,5 +24,7 @@ CREATE INDEX "api_key_user_id_idx" ON "api_key"("user_id");
 ALTER TABLE "api_key" ADD CONSTRAINT "api_key_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "user"("user_id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- Tofu: row-level security on for every table this file creates. The app reads and writes them over its own
--- connection, which these rules do not limit; the database's public Data API gets nothing from them.
+-- connection, which these rules do not limit. Tofu opens the tables of the migration files it applies to the
+-- database's Data API, so these lines, with no policy, are what keep anyone holding the database's public key from
+-- every row: keep them (TOFU.md, *Schema*).
 ALTER TABLE "api_key" ENABLE ROW LEVEL SECURITY;

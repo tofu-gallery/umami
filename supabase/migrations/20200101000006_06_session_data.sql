@@ -1,5 +1,5 @@
--- Tofu: a copy of prisma/migrations/06_session_data/migration.sql, applied by scripts/tofu-migrate.js during the build
--- (see TOFU.md). Changes from upstream, if any, are marked "Tofu:" below.
+-- Tofu: a copy of prisma/migrations/06_session_data/migration.sql. It is applied once, in file-name order; TOFU.md
+-- (*Schema*) says what applies it. Changes from upstream, if any, are marked "Tofu:" below.
 
 -- DropIndex
 DROP INDEX IF EXISTS "event_data_website_id_created_at_event_key_idx";

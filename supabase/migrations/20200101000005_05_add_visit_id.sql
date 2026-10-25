@@ -1,5 +1,5 @@
--- Tofu: a copy of prisma/migrations/05_add_visit_id/migration.sql, applied by scripts/tofu-migrate.js during the build
--- (see TOFU.md). Changes from upstream, if any, are marked "Tofu:" below.
+-- Tofu: a copy of prisma/migrations/05_add_visit_id/migration.sql. It is applied once, in file-name order; TOFU.md
+-- (*Schema*) says what applies it. Changes from upstream, if any, are marked "Tofu:" below.
 
 -- AlterTable
 ALTER TABLE "website_event" ADD COLUMN "visit_id" UUID NULL;

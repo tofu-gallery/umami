@@ -1,12 +1,15 @@
 /* eslint-disable no-console */
-// Tofu: this file is Tofu's addition (see TOFU.md). It applies supabase/migrations during the build, once each.
+// Tofu: this file is Tofu's addition (see TOFU.md, *Schema*). During the build it applies the supabase/migrations
+// files the database's migration ledger does not record yet.
 //
 // Tofu gives a copy its database as DATABASE_URL (a transaction pooler, which Prisma Migrate cannot use) and the
-// database server's root certificate as SUPABASE_CA_CERT. The build reads several programs Tofu does not read, so Tofu
-// leaves the supabase/migrations folder to the build, and this script applies it: the files in file-name order, each in
-// one transaction with its row in the Supabase CLI's own ledger (supabase_migrations.schema_migrations, created the way
-// Tofu creates it), so neither this script, Tofu nor the Supabase CLI ever runs a file twice. Without DATABASE_URL it
-// applies nothing.
+// database server's root certificate as SUPABASE_CA_CERT. On Tofu this script normally applies nothing: Tofu reads the
+// build command in vercel.json as one that runs no migration step, so Tofu applies supabase/migrations itself before
+// the build, recording each file in the Supabase CLI's own ledger (supabase_migrations.schema_migrations), and this
+// script finds them all recorded. It applies a file only where that ledger lacks it (a deploy Tofu's own step did not
+// run for, or the repository run elsewhere): the files in file-name order, each in one transaction with its ledger row
+// (the ledger created the way Tofu creates it), so neither this script, Tofu nor the Supabase CLI ever runs a file
+// twice. Without DATABASE_URL it applies nothing.
 import 'dotenv/config';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';

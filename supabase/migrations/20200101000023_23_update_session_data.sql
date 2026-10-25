@@ -1,5 +1,5 @@
--- Tofu: a copy of prisma/migrations/23_update_session_data/migration.sql, applied by scripts/tofu-migrate.js during the build
--- (see TOFU.md). Changes from upstream, if any, are marked "Tofu:" below.
+-- Tofu: a copy of prisma/migrations/23_update_session_data/migration.sql. It is applied once, in file-name order; TOFU.md
+-- (*Schema*) says what applies it. Changes from upstream, if any, are marked "Tofu:" below.
 
 WITH ranked_session_data AS (
   SELECT

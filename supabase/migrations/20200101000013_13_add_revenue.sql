@@ -1,5 +1,5 @@
--- Tofu: a copy of prisma/migrations/13_add_revenue/migration.sql, applied by scripts/tofu-migrate.js during the build
--- (see TOFU.md). Changes from upstream, if any, are marked "Tofu:" below.
+-- Tofu: a copy of prisma/migrations/13_add_revenue/migration.sql. It is applied once, in file-name order; TOFU.md
+-- (*Schema*) says what applies it. Changes from upstream, if any, are marked "Tofu:" below.
 
 -- CreateTable
 CREATE TABLE "revenue" (
@@ -31,5 +31,7 @@ CREATE INDEX "revenue_website_id_created_at_idx" ON "revenue"("website_id", "cre
 CREATE INDEX "revenue_website_id_session_id_created_at_idx" ON "revenue"("website_id", "session_id", "created_at");
 
 -- Tofu: row-level security on for every table this file creates. The app reads and writes them over its own
--- connection, which these rules do not limit; the database's public Data API gets nothing from them.
+-- connection, which these rules do not limit. Tofu opens the tables of the migration files it applies to the
+-- database's Data API, so these lines, with no policy, are what keep anyone holding the database's public key from
+-- every row: keep them (TOFU.md, *Schema*).
 ALTER TABLE "revenue" ENABLE ROW LEVEL SECURITY;
