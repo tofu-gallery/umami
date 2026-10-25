@@ -5,6 +5,8 @@ import { PrismaClient } from '@/generated/prisma/client';
 import { DATA_TYPE, DEFAULT_PAGE_SIZE, FILTER_COLUMNS, OPERATORS, SESSION_COLUMNS } from './constants';
 import { filtersObjectToArray } from './params';
 import type { Operator, PropertyFilter, QueryFilters, QueryOptions } from './types';
+// Tofu: the pool's TLS settings for a database Tofu manages (see TOFU.md).
+import { databasePoolConfig } from './tofu-database';
 
 const log = debug('umami:prisma');
 
@@ -867,7 +869,7 @@ function getClient() {
 
   const schema = getSchema();
 
-  const baseAdapter = new PrismaPg({ connectionString: url }, { schema });
+  const baseAdapter = new PrismaPg(databasePoolConfig(url), { schema });
 
   const baseClient = new PrismaClient({
     adapter: baseAdapter,
@@ -885,7 +887,7 @@ function getClient() {
     return baseClient;
   }
 
-  const replicaAdapter = new PrismaPg({ connectionString: replicaUrl }, { schema });
+  const replicaAdapter = new PrismaPg(databasePoolConfig(replicaUrl), { schema });
 
   const replicaClient = new PrismaClient({
     adapter: replicaAdapter,
