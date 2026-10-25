@@ -1,8 +1,10 @@
 import { CURRENT_VERSION, TELEMETRY_PIXEL } from '@/lib/constants';
 
 export async function GET() {
+  // Tofu: off unless ENABLE_TELEMETRY is set; upstream loads a pixel from i.umami.is by default (see TOFU.md).
   if (
     process.env.NODE_ENV !== 'production' ||
+    !process.env.ENABLE_TELEMETRY ||
     process.env.DISABLE_TELEMETRY ||
     process.env.PRIVATE_MODE
   ) {
